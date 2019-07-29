@@ -1,5 +1,6 @@
 package ABD.Models;
 
+import ABD.Models.Enums.UserRoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -25,8 +27,17 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    public User(String userName, String fullName,String password,String passwordRepeat,  String email) {
+        this.userName = userName;
+        this.fullName = fullName;
+        this.password = password;
+        this.passwordRepeat = passwordRepeat;
+        this.email = email;
+    }
+
     @Id
     @Column(unique = true, nullable = false, name ="user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
 
     @NotBlank
@@ -52,9 +63,15 @@ public class User implements UserDetails {
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,255}$", message = "Wrong email!")
     private String email;
 
+    @Enumerated(value = EnumType.STRING)
+    private UserRoleEnum userRole;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+//        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        String userRole = getUserRole().name();
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
+        return Collections.singletonList(authority);
     }
 
     @Override

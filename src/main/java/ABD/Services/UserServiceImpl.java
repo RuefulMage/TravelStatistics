@@ -1,5 +1,6 @@
 package ABD.Services;
 
+import ABD.Models.Enums.UserRoleEnum;
 import ABD.Models.User;
 import ABD.Repos.HibernateUsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(user.getEmail()) != null) {
             throw new DuplicateKeyException("User with this email already exist");
         }
+        user.setUserRole(UserRoleEnum.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPasswordRepeat(user.getPassword());
         userRepository.save(user);
