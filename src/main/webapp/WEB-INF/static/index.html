@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>HTML Academy: Седона</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<header class="page-header">
+    <nav class="main-nav">
+      <a class="main-nav__logo" href="main.html">
+        <img src="img/logo.jpg" width="140" height="110" alt="">
+      </a>
+      <ul class="main-nav__list main-nav__list--login">
+        <li class="main-nav__item main-nav__item--active">
+          <a class="main-nav__link main-nav__link--active" href="index.html">Главная</a>
+        </li>
+        <li class="main-nav__item">
+          <a class="main-nav__link" href="photo.html">Фото и видео</a>
+        </li>
+        <li class="main-nav__item">
+          <a class="main-nav__link" href="form.html">Форма отзыва</a>
+        </li>
+        <li class="main-nav__item">
+          <a class="main-nav__link" href="#"></a>
+        </li>
+      </ul>
+    </nav>
+    </header>
+	<main class="page-main page-main">
+		<section class="login-window">
+      <h1 class="login-window__headline">
+        Вход на сайт
+      </h1>
+      <div class="login-form">
+      <form class="login-form__field" action="#" method="get">
+        <ul class="user-form">
+         <li class="user-form__login">
+          <label for="yourlogin"></label>
+          <div class="bottom-line">
+          <input type="login" id="yourlogin" name="login" value="" placeholder="Логин" required>
+          </div>
+         </li>
+         <li class="user-form__password">
+          <label for="password"></label>
+          <div class="bottom-line">
+          <input type="password" id="password" name="password" placeholder="Пароль" required>
+          </div>
+         </li>
+         <li class="user-form__help">
+          <label class="login-checkbox">
+          <input type="checkbox" name="remember" class="visually-hidden">
+          <span class="checkbox-indicator"></span>
+          Запомните меня
+          </label>
+          <a class="restore" href="main.html">Я забыл пароль!</a>
+        </li>
+        <li class="user-form__sign-in">
+           <input type="submit" value="Войти">
+        </li>
+      </ul>
+      </form>
+      <div class="sideline">
+      </div>
+       <div class="user-registration">
+        <p class="user-registration__text">У Вас еще нет аккаунта?
+        </p>
+        <a href="reg.html" class="user-registration__link" >
+          <p>Создать аккаунт.
+          </p></a>
+      </div>
+    </div>
+		</section>
+	</main>
+</body>
+</html>
