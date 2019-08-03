@@ -13,9 +13,7 @@ public class RegistrationForm {
     private String passwordRepeat;
 
     public User toUser(PasswordEncoder passwordEncoder){
-        User user = new User();
-        user.builder().userName(userName).fullName(fullName).email(email).password(passwordEncoder.encode(password))
-                .passwordRepeat(passwordEncoder.encode(passwordRepeat));
+        User user = new User(userName, fullName, password, passwordRepeat,email);
         return user;
     }
 }

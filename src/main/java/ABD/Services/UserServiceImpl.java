@@ -10,14 +10,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
+//TODO поменять все на Optional
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private HibernateUsersRepo userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+//    @Autowired
+//    public UserServiceImpl(HibernateUsersRepo userRepository, PasswordEncoder passwordEncoder) {
+//        this.userRepository = userRepository;
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
 
 
@@ -38,7 +43,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        return this.userRepository.findByEmail(email);    }
+        return this.userRepository.findByEmail(email);
+    }
+
+
+    @Override
+    public User findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

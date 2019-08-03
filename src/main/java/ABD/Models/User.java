@@ -14,16 +14,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -40,35 +36,32 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
 
-    @NotBlank
-    @Column(unique = true, nullable = false, name ="userName")
+    @Column(name ="userName")
     @Size(min=6, message="Username must be at least 6 characters long")
     private String userName;
 
-    @NotBlank
-    @Column(nullable = false, name ="fullName")
+    @Column(name ="fullName")
     private String fullName;
 
-    @NotBlank
-    @Column(nullable = false, name ="password")
+    @Column(name ="password")
     @Size(min=6, message="Password must be at least 6 characters long")
     private String password;
 
-    @NotBlank
     @Transient
     private String passwordRepeat;
 
-    @NotBlank
-    @Column(nullable = false, unique = true, name = "email")
+    @Column(name = "email")
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,255}$", message = "Wrong email!")
     private String email;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "user")
+    private List<Marker> markers = new ArrayList<Marker>();
 
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum userRole;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
         String userRole = getUserRole().name();
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole);
         return Collections.singletonList(authority);
@@ -98,12 +91,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-//    private boolean active;
-//    private String googleName;
-//    private String googleUsername
-
-
-
 
 }

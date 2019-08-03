@@ -38,7 +38,7 @@ public class RegistrationController {
     @GetMapping
     public String registration(Authentication authentication, ModelMap modelMap){
         if (authentication != null){
-            return "redirect:home";
+            return "redirect:login";
         }
         modelMap.put("user", new User());
         return showRegistrationForm(modelMap);
@@ -53,7 +53,7 @@ public class RegistrationController {
         if(!result.hasErrors()){
             try{
                 userService.saveUser(user);
-                return "redirect:home";
+                return "redirect:login";
             }catch(DuplicateKeyException ex){
                 result.rejectValue("username", "entry.duplicate", "There is account with such email already.");
             }
@@ -63,8 +63,4 @@ public class RegistrationController {
         }
         return showRegistrationForm(modelMap);
     }
-
-
-
-
 }

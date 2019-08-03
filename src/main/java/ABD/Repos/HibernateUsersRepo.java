@@ -10,6 +10,5 @@ import java.util.List;
 public interface HibernateUsersRepo extends CrudRepository<User, Integer> {
     User findByUserName(String userName);
     User findByEmail(String email);
-//    List<User> findAllById(int id);
     List<User> findAll();
 }

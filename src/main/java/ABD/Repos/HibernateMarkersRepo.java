@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface HibernateMarkersRepo extends CrudRepository<Marker,Integer> {
     List<Marker> findAll();
-    List<Marker> findByUser(User user);
+    List<Marker> findByUser(int user_id);
 }
